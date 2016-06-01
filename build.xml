@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE project>
+<project name="java-library" basedir="." default="main">
+
+    <target name="clean">
+        <delete includeemptydirs="true">
+            <fileset dir="bin"/>
+            <fileset dir="test_results"/>
+        </delete>
+    </target>
+
+    <target name="compile">
+        <mkdir dir="bin"/>
+        <javac destdir="bin" debug="false" includeantruntime="false">
+            <classpath>
+                <pathelement location="lib/appframework-1.0.3.jar"/>
+                <pathelement location="lib/gson-2.2.2.jar"/>
+                <pathelement location="lib/jtds-1.2.8.jar"/>
+                <pathelement location="lib/junit-4.10.jar"/>
+                <pathelement location="lib/mail.jar"/>
+            </classpath>
+            <src>
+                <pathelement location="src"/>
+                <pathelement location="test"/>
+            </src>
+        </javac>
+    </target>
+
+    <target name="test" depends="compile">
+        <mkdir dir="test_results"/>
+        <junit printsummary="on" haltonerror="true" haltonfailure="true">
+            <classpath>
+                <pathelement location="bin"/>
+                <pathelement location="lib/appframework-1.0.3.jar"/>
+                <pathelement location="lib/gson-2.2.2.jar"/>
+                <pathelement location="lib/jtds-1.2.8.jar"/>
+                <pathelement location="lib/junit-4.10.jar"/>
+                <pathelement location="lib/mail.jar"/>
+            </classpath>
+            <formatter type="plain"/>
+            <batchtest todir="test_results">
+                <fileset dir="test">
+                    <include name="**/*Test.java"/>
+                </fileset>
+            </batchtest>
+        </junit>
+    </target>
+
+    <target name="main" depends="test"/>
+</project>
