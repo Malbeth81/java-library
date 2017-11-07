@@ -20,8 +20,8 @@
                 <pathelement location="lib/mail.jar"/>
             </classpath>
             <src>
-                <pathelement location="src"/>
-                <pathelement location="test"/>
+                <pathelement location="src/main"/>
+                <pathelement location="src/test"/>
             </src>
         </javac>
     </target>
@@ -39,7 +39,7 @@
             </classpath>
             <formatter type="plain"/>
             <batchtest todir="test_results">
-                <fileset dir="test">
+                <fileset dir="src/test">
                     <include name="**/*Test.java"/>
                 </fileset>
             </batchtest>
